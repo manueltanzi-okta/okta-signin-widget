@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* eslint max-params: [2, 39] */
+/* eslint max-params: [2, 40] */
 define([
   'util/BaseLoginRouter',
   'PrimaryAuthController',
@@ -49,6 +49,7 @@ define([
   'RefreshAuthStateController',
   'RegistrationController',
   'RegistrationCompleteController',
+  'ConsentRequiredController',
   'views/shared/SecurityBeacon',
   'views/shared/FactorBeacon'
 ],
@@ -89,6 +90,7 @@ function (BaseLoginRouter,
           RefreshAuthStateController,
           RegistrationController,
           RegistrationCompleteController,
+          ConsentRequiredController,
           SecurityBeacon,
           FactorBeacon) {
   return BaseLoginRouter.extend({
@@ -136,6 +138,7 @@ function (BaseLoginRouter,
       'signin/refresh-auth-state(/:token)': 'refreshAuthState',
       'signin/register': 'register',
       'signin/register-complete': 'registerComplete',
+      'signin/consent': 'consentRequired',
       '*wildcard': 'primaryAuth'
     },
 
@@ -390,6 +393,10 @@ function (BaseLoginRouter,
 
     registerComplete: function() {
       this.render(RegistrationCompleteController);
+    },
+
+    consentRequired: function() {
+      this.render(ConsentRequiredController);
     }
 
   });
