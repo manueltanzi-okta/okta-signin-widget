@@ -14,9 +14,10 @@ define([
   'okta',
   'util/FormController',
   'util/FormType',
-  'views/consent/ScopeList'
+  'views/consent/ScopeList',
+  'views/consent/ConsentButtonsBar'
 ],
-function (Okta, FormController, FormType, ScopeList) {
+function (Okta, FormController, FormType, ScopeList, ConsentButtonsBar) {
 
   var _ = Okta._;
 
@@ -25,7 +26,8 @@ function (Okta, FormController, FormType, ScopeList) {
     initialize: function () {
       // this.addSectionTitle('test');
       this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      // this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      this.model.set('scopes', [{name: 'test1'}, {name: 'test2'}, {name: 'test3'}, {name: 'test4'}]);
     },
     Model: {
       props: {
@@ -73,24 +75,27 @@ function (Okta, FormController, FormType, ScopeList) {
           FormType.View({
             View: new ScopeList({ model: this.model })
           }),
-          FormType.Button({
-            title: 'CONSENT',
-            // className: 'button button-primary button-wide',
-            // attributes: {'data-se': 'custom-button'},
-            click: function () {
-              // this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-              // this.model.set('scopes', _.pluck(this.options.appState.get('transaction').scopes, 'name'));
-              this.model.save();
-            }
+          FormType.View({
+            View: new ConsentButtonsBar({ model: this.model })
           }),
-          FormType.Button({
-            title: 'CANCEL',
-            // className: 'button button-primary button-wide',
-            // attributes: {'data-se': 'custom-button'},
-            click: function () {
-              this.model.cancel();
-            }
-          })
+          // FormType.Button({
+          //   title: 'CONSENT',
+          //   className: 'button-primary button next link-button',
+          //   // attributes: {'data-se': 'custom-button'},
+          //   click: function () {
+          //     // this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
+          //     // this.model.set('scopes', _.pluck(this.options.appState.get('transaction').scopes, 'name'));
+          //     this.model.save();
+          //   }
+          // }),
+          // FormType.Button({
+          //   title: 'CANCEL',
+          //   className: 'button-primary button next link-button',
+          //   // attributes: {'data-se': 'custom-button'},
+          //   click: function () {
+          //     this.model.cancel();
+          //   }
+          // })
         ];
       }
     }
