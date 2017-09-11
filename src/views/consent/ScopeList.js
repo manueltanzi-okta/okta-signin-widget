@@ -20,8 +20,7 @@ define([
   return Okta.View.extend({
     className: 'scope-list clearfix', // decide if to keep clearfix or not
     template: '\
-      <div class="scope-list-wrapper">\
-      </div>\
+      <div class="scope-list-wrapper"></div>\
     ',
 
     events: {
@@ -32,11 +31,13 @@ define([
       // console.log('scopes', this.get('scopes'));
       console.log('scopes', this.model.get('expiresAt'));
       // setTimeout(() => {
-      for (var scope in this.model.get('scopes')) { // do with ES6 or _.
+      this.model.get('scopes').forEach(scope => { // do with ES6 or _.
         console.log('scope', scope);
-        var item = new ScopeItem();
+        var item = new ScopeItem({
+          name: scope.name
+        });
         this.$('.scope-list-wrapper').append(item.$el);
-      }
+      });
       // }, 3000);
     },
 

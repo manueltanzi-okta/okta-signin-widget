@@ -11,52 +11,35 @@
  */
 
 define([
-  'okta',
-  'util/FactorUtil',
-  'util/RouterUtil'
-], function (Okta, FactorUtil, RouterUtil) {
+  'okta'
+], function (Okta) {
 
   var _ = Okta._;
 
   return Okta.View.extend({
     className: 'scope-item', //clearfix?
     template: '\
-      <div class="scope-item-wrapper">\
-          <div class="scan-instructions-details">\
-              TEST\
-          </div>\
+      <div class="scope-item-text">\
+        <p>{{name}}</p>\
       </div>\
+      {{#if true}}\
+        <span class="scope-item-tooltip icon form-help-16"></span>\
+      {{/if}}\
     ',
-    // '\
-    //   <div class="scan-instructions-details-wrapper">\
-    //       <div class="scan-instructions-details">\
-    //           <p>{{instructions}}</p>\
-    //           {{#if params.innerTooltip}}\
-    //         <span class="input-tooltip icon form-help-16"></span>\
-    //     {{/if}}\
-    //       </div>\
-    //   </div>\
-    // ',
 
     events: {
     },
 
     initialize: function () {
       console.log('here bitches');
+      console.log(this);
       this.render();
     },
 
     // getTemplateData: function () {
-    //   var factorName = FactorUtil.getFactorLabel(this.model.get('__provider__'), this.model.get('__factorType__'));
-    //   var instructions;
-    //   if (this.model.get('__provider__') === 'GOOGLE') {
-    //     instructions = Okta.loc('enroll.totp.setupGoogleAuthApp', 'login', [factorName]);
-    //   } else {
-    //     instructions = Okta.loc('enroll.totp.setupApp', 'login', [factorName]);
-    //   }
+    //   var name = FactorUtil.getFactorLabel(this.model.get('__provider__'), this.model.get('__factorType__'));
     //   return {
-    //     instructions: instructions,
-    //     qrcode: this.options.appState.get('qrcode')
+    //     name: instructions
     //   };
     // }
   });

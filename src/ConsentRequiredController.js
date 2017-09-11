@@ -25,7 +25,7 @@ function (Okta, FormController, FormType, ScopeList) {
     initialize: function () {
       // this.addSectionTitle('test');
       this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      this.model.set('scopes', _.pluck(this.options.appState.get('transaction').scopes, 'name'));
+      this.model.set('scopes', this.options.appState.get('transaction').scopes);
     },
     Model: {
       props: {
@@ -37,7 +37,7 @@ function (Okta, FormController, FormType, ScopeList) {
           return transaction.consent({
             consent: {
               expiresAt: this.get('expiresAt'),
-              scopes: this.get('scopes')
+              scopes: _.pluck(this.get('scopes'), 'name')
             }
           });
         });
