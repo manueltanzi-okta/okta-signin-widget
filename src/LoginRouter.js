@@ -49,6 +49,7 @@ define([
   'RefreshAuthStateController',
   'RegistrationController',
   'RegistrationCompleteController',
+  'ConsentRequiredController',
   'views/shared/SecurityBeacon',
   'views/shared/FactorBeacon'
 ],
@@ -89,6 +90,7 @@ function (BaseLoginRouter,
           RefreshAuthStateController,
           RegistrationController,
           RegistrationCompleteController,
+          ConsentRequiredController,
           SecurityBeacon,
           FactorBeacon) {
   return BaseLoginRouter.extend({
@@ -136,6 +138,7 @@ function (BaseLoginRouter,
       'signin/refresh-auth-state(/:token)': 'refreshAuthState',
       'signin/register': 'register',
       'signin/register-complete': 'registerComplete',
+      'signin/consent': 'consentRequired',
       '*wildcard': 'primaryAuth'
     },
 
@@ -390,6 +393,10 @@ function (BaseLoginRouter,
 
     registerComplete: function() {
       this.render(RegistrationCompleteController);
+    },
+
+    consentRequired: function() {
+      this.render(ConsentRequiredController);
     }
 
   });

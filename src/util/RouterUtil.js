@@ -142,6 +142,9 @@ function (Okta, Util, OAuth2Util, Enums, BrowserFeatures, Errors, ErrorCodes) {
 
       router.settings.callGlobalSuccess(Enums.SUCCESS, successData);
       return;
+    case 'CONSENT_REQUIRED':
+      router.navigate('signin/consent', { trigger: true });
+      return;
     case 'MFA_REQUIRED':
       var factor = router.appState.get('factors').getDefaultFactor();
       var url = fn.createVerifyUrl(factor.get('provider'), factor.get('factorType'));
