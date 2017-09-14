@@ -19,10 +19,8 @@ define([
   return Okta.View.extend({
     className: 'consent-button-bar clearfix', // decide if to keep clearfix or not
     template: '\
-      <input class="cancel-button" value="Don\'t Allow">\
-      </input>\
-      <input class="consent-button" value="Allow Access">\
-      </input>\
+      <input type="button" class="consent-button" value="Allow Access" />\
+      <input type="button" class="cancel-button" value="Don\'t Allow" />\
     ',
 
     events: {

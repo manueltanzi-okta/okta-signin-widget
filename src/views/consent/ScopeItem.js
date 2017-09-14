@@ -11,7 +11,8 @@
  */
 
 define([
-  'okta'
+  'okta',
+  'qtip'
 ], function (Okta) {
 
   var _ = Okta._;
@@ -23,7 +24,7 @@ define([
         <p>{{name}}</p>\
       </div>\
       {{#if true}}\
-        <span class="scope-item-tooltip icon form-help-16"></span>\
+        <span class="scope-item-tooltip icon info-16-gray" />\
       {{/if}}\
     ',
 
@@ -31,17 +32,23 @@ define([
     },
 
     initialize: function () {
-      console.log('here bitches');
-      console.log(this);
       this.render();
     },
 
-    // getTemplateData: function () {
-    //   var name = FactorUtil.getFactorLabel(this.model.get('__provider__'), this.model.get('__factorType__'));
-    //   return {
-    //     name: instructions
-    //   };
-    // }
+    postRender: function () {
+      console.log('here find description', this);
+      this.$('.scope-item-tooltip').qtip({ // Grab some elements to apply the tooltip to
+        content: {
+          text: this.options.description
+        },
+        style: {classes: 'okta-sign-in-tooltip qtip-custom qtip-shadow'},
+        position: {
+          my: 'bottom right',
+          target: 'mouse'
+        }
+      });
+    }
+
   });
 
 });

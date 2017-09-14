@@ -11,35 +11,37 @@
  */
 
 define([
-  'okta',
-  './ScopeItem'
-], function (Okta, ScopeItem) {
+  'okta'
+], function (Okta) {
 
   var _ = Okta._;
 
   return Okta.View.extend({
-    className: 'scope-list clearfix', // decide if to keep clearfix or not
+    className: 'consent-beacon', // decide if to keep clearfix or not
     template: '\
-      <div class="scope-list-wrapper"></div>\
+      <div class="beacon-wrapper">\
+        <div class="avatar-wrapper"/>\
+        <div class="arrows-wrapper" />\
+        <div class="avatar-wrapper"/>\
+      </div>\
     ',
 
     events: {
     },
 
     postRender: function () {
-      console.log('modelinscoeplist', this.model);
-      // console.log('scopes', this.get('scopes'));
-      console.log('scopes', this.model.get('expiresAt'));
-      // setTimeout(() => {
-      this.model.get('scopes').forEach(scope => { // do with ES6 or _.
-        console.log('scope', scope);
-        var item = new ScopeItem({
-          name: scope.name,
-          description: scope.description
-        });
-        this.$('.scope-list-wrapper').append(item.$el);
-      });
-      // }, 3000);
+      // console.log('modelinscoeplist', this.model);
+      // // console.log('scopes', this.get('scopes'));
+      // console.log('scopes', this.model.get('expiresAt'));
+      // // setTimeout(() => {
+      // this.model.get('scopes').forEach(scope => { // do with ES6 or _.
+      //   console.log('scope', scope);
+      //   var item = new ScopeItem({
+      //     name: scope.name
+      //   });
+      //   this.$('.scope-list-wrapper').append(item.$el);
+      // });
+      // // }, 3000);
     },
 
     // getTemplateData: function () {

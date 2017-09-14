@@ -1,9 +1,48 @@
+.consent-beacon {
+  text-align: center;
+
+  .beacon-wrapper {
+    display: inline-block;
+    margin: auto;
+  }
+
+  .avatar-wrapper {
+    float: left;
+    height: 90px;
+    width: 90px;
+    background-color: grey;
+    border: 1px solid;
+    border-radius: 3px;
+  }
+
+  .arrows-wrapper {
+    float: left;
+    height: 90px;
+    width: 40px;
+    background-color: yellow;
+  }
+}
+
+.consent-title {
+  padding-bottom: 25px;
+
+  p {
+    font-size: 17px;
+  }
+
+  b {
+    font-weight: bold;
+  }
+}
+
 .scope-item {
   display: inline-block;
   width: 100%;
+  padding-bottom: 25px;
 
   .scope-item-text {
     float: left;
+    font-size: 17px;
     width: 85%;
     word-wrap: break-word;
   }
@@ -14,13 +53,28 @@
   }
 }
 
+.consent-description {
+  padding-bottom: 25px;
+  font-size: 13px;
+
+  p {
+    color: #a7a7a7;
+    padding-bottom: 25px;
+  }
+
+  a {
+    color: #007dc1;
+  }
+}
+
 .consent-button-bar {
   display: inline-block;
   width: 100%;
 
   input {
+    font-size: 13px;
     float: right;
-    width: 80px;
+    width: 100px;
     height: 30px;
     padding: 0 10px;
     line-height: 30px;

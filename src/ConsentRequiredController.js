@@ -14,10 +14,11 @@ define([
   'okta',
   'util/FormController',
   'util/FormType',
+  'views/consent/ConsentBeacon',
   'views/consent/ScopeList',
   'views/consent/ConsentButtonsBar'
 ],
-function (Okta, FormController, FormType, ScopeList, ConsentButtonsBar) {
+function (Okta, FormController, FormType, ConsentBeacon, ScopeList, ConsentButtonsBar) {
 
   var _ = Okta._;
 
@@ -25,9 +26,10 @@ function (Okta, FormController, FormType, ScopeList, ConsentButtonsBar) {
     className: 'consent-required',
     initialize: function () {
       // this.addSectionTitle('test');
+      console.log('transaction', this.options.appState.get('transaction'));
       this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
       // this.model.set('scopes', this.options.appState.get('transaction').scopes);
-      this.model.set('scopes', [{name: 'test1'}, {name: 'test2'}, {name: 'test3'}, {name: 'test4'}]);
+      this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -35,6 +37,7 @@ function (Okta, FormController, FormType, ScopeList, ConsentButtonsBar) {
         scopes: ['array', true]
       },
       save: function () {
+        console.log(this);
         return this.doTransaction(function(transaction) {
           return transaction.consent({
             consent: {
@@ -45,35 +48,69 @@ function (Okta, FormController, FormType, ScopeList, ConsentButtonsBar) {
         });
       },
       cancel: function () {
+        var self = this;
         return this.doTransaction(function(transaction) {
           return transaction.cancel();
+        }).then(function () {
+          console.log('self', self);
+          self.state.set('navigateDir', Enums.DIRECTION_BACK);
+          self.options.appState.trigger('navigate', '');
         });
       }
     },
     Form: {
       noButtonBar: true,
-      title: function () {
-        return 'Consent Required';
-      },
-      subtitle: function () {
-        return 'Click button to give consent';
-      },
+      // title: function () {
+      //   return 'Consent Required';
+      // },
+      // subtitle: function () {
+      //   return 'Click button to give consent';
+      // },
       formChildren: function () {
         return [
           FormType.View({
+            View: new ConsentBeacon({ model: this.model })
+          }),
+          FormType.View({
             View: Okta.View.extend({
-              template: 'blabla',
-          //       '\
-          //   <p>{{i18n code="enroll.totp.enrollViaEmail.msg" bundle="login"}}</p>\
-          //   <p class="email-address">{{email}}</p>\
-          // ',
-              // getTemplateData: function () {
-              //   return {email: this.options.appState.get('userEmail')};
-              // }
+              className: 'consent-title',
+              template: '\
+                <p><b>{{appName}}</b> is requesting permissions to:</p>\
+              ',
+              getTemplateData: function () {
+                return { appName: this.options.appState.get('transaction').target.label };
+              }
             })
           }),
           FormType.View({
             View: new ScopeList({ model: this.model })
+          }),
+          FormType.View({
+            View: Okta.View.extend({
+              className: 'consent-description',
+              template: '\
+                <p>By clicking Allow Access, you allow this app access to the actions listed above.</p>\
+                {{#if termsOfService}}\
+                  <a href="{{termsOfService}}">\
+                    Terms of Service\
+                  </a>\
+                {{/if}}\
+                {{#if termsOfService}}{{#if privacyPolicy}}\
+                  &#8226\
+                {{/if}}{{/if}}\
+                {{#if privacyPolicy}}\
+                  <a href="{{privacyPolicy}}">\
+                    Privacy Policy\
+                  </a>\
+                {{/if}}\
+              ',
+              getTemplateData: function () {
+                return {
+                  termsOfService: 'link1', //this.options.appState.get('transaction').target.terms-of-service.href,
+                  privacyPolicy: 'link2' //this.options.appState.get('transaction').target.privacy-policy.href
+                }
+              }
+            })
           }),
           FormType.View({
             View: new ConsentButtonsBar({ model: this.model })
