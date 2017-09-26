@@ -14,22 +14,25 @@ define([
   'okta',
   'util/FormController',
   'util/FormType',
+  'views/consent/ConsentHeader',
   'views/consent/ConsentBeacon',
   'views/consent/ScopeList',
   'views/consent/ConsentButtonsBar'
 ],
-function (Okta, FormController, FormType, ConsentBeacon, ScopeList, ConsentButtonsBar) {
+function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeList, ConsentButtonsBar) {
 
-  var _ = Okta._;
+  var $ = Okta.$,
+      _ = Okta._;
 
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
       // this.addSectionTitle('test');
+      console.log('auth-beacon2', $('.okta-sign-in-header'));
       console.log('transaction', this.options.appState.get('transaction'));
       this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
       // this.model.set('scopes', this.options.appState.get('transaction').scopes);
-      this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
+      this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', displayName: 'TEST B', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -68,6 +71,13 @@ function (Okta, FormController, FormType, ConsentBeacon, ScopeList, ConsentButto
       // },
       formChildren: function () {
         return [
+          FormType.View({
+            View: new ConsentHeader({
+              orgLogo: 'logoUrl',
+              userName: 'nTest',
+              userLastName: 'lTest'
+            })
+          }),
           FormType.View({
             View: new ConsentBeacon({ model: this.model })
           }),
@@ -134,7 +144,12 @@ function (Okta, FormController, FormType, ConsentBeacon, ScopeList, ConsentButto
           //   }
           // })
         ];
-      }
+      },
+      preRender: function () {
+        console.log('HErarE');
+        console.log('auth-beacon', $('.okta-sign-in-header'));
+        $('.okta-sign-in-header').hide();
+      },
     }
   });
 

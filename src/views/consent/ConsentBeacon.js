@@ -20,9 +20,24 @@ define([
     className: 'consent-beacon', // decide if to keep clearfix or not
     template: '\
       <div class="beacon-wrapper">\
-        <div class="avatar-wrapper"/>\
-        <div class="arrows-wrapper" />\
-        <div class="avatar-wrapper"/>\
+        <div class="logo-wrapper">\
+          <div class="logo">\
+            <span class="user-logo icon person-16-gray" />\
+          </div>\
+        </div>\
+        <div class="arrows-wrapper">\
+          <div class="arrow-left">\
+            <span class="arrow icon arrow-right-16" />\
+          </div>\
+          <div class="arrow-right">\
+            <span class="arrow icon arrow-left-16" />\
+          </div>\
+        </div>\
+        <div class="logo-wrapper">\
+          <div class="logo">\
+            <img class="client-logo" src="http://rain.okta1.com:1802/assets/img/logos/okta-logo.00b28e552573899e15fa6e77278759d5.png"/>\
+          </div>\
+        </div>\
       </div>\
     ',
 
