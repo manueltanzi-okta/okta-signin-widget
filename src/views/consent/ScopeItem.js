@@ -18,7 +18,7 @@ define([
   var _ = Okta._;
 
   return Okta.View.extend({
-    className: 'scope-item', //clearfix?
+    className: 'scope-item',
     template: '\
       <div class="scope-item-text">\
         <p>{{name}}</p>\
@@ -28,27 +28,22 @@ define([
       {{/if}}\
     ',
 
-    events: {
-    },
-
     initialize: function () {
       this.render();
     },
 
     postRender: function () {
-      console.log('here find description', this);
-      this.$('.scope-item-tooltip').qtip({ // Grab some elements to apply the tooltip to
+      this.$('.scope-item-tooltip').qtip({
         content: {
           text: this.options.description
         },
-        style: {classes: 'okta-sign-in-tooltip qtip-custom qtip-shadow'},
+        style: { classes: 'okta-sign-in-tooltip qtip-custom qtip-shadow' },
         position: {
           my: 'bottom right',
           target: 'mouse'
         }
       });
     }
-
   });
 
 });

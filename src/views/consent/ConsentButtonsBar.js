@@ -17,7 +17,7 @@ define([
   var _ = Okta._;
 
   return Okta.View.extend({
-    className: 'consent-button-bar clearfix', // decide if to keep clearfix or not
+    className: 'consent-button-bar',
     template: '\
       <input type="button" class="consent-button" value="Allow Access" />\
       <input type="button" class="cancel-button" value="Don\'t Allow" />\
@@ -28,38 +28,13 @@ define([
       'click input.cancel-button': 'cancel'
     },
 
-    consent: function () { this.model.save() },
-
-    cancel: function () { this.model.cancel() },
-
-    postRender: function () {
-      // console.log('modelinscoeplist', this.model);
-      // // console.log('scopes', this.get('scopes'));
-      // console.log('scopes', this.model.get('expiresAt'));
-      // // setTimeout(() => {
-      // this.model.get('scopes').forEach(scope => { // do with ES6 or _.
-      //   console.log('scope', scope);
-      //   var item = new ScopeItem({
-      //     name: scope.name
-      //   });
-      //   this.$('.scope-list-wrapper').append(item.$el);
-      // });
-      // // }, 3000);
+    consent: function () {
+      this.model.save()
     },
 
-    // getTemplateData: function () {
-    //   var factorName = FactorUtil.getFactorLabel(this.model.get('__provider__'), this.model.get('__factorType__'));
-    //   var instructions;
-    //   if (this.model.get('__provider__') === 'GOOGLE') {
-    //     instructions = Okta.loc('enroll.totp.setupGoogleAuthApp', 'login', [factorName]);
-    //   } else {
-    //     instructions = Okta.loc('enroll.totp.setupApp', 'login', [factorName]);
-    //   }
-    //   return {
-    //     instructions: instructions,
-    //     qrcode: this.options.appState.get('qrcode')
-    //   };
-    // }
+    cancel: function () {
+      this.model.cancel()
+    }
   });
 
 });

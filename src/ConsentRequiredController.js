@@ -27,12 +27,10 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
-      // this.addSectionTitle('test');
-      console.log('auth-beacon2', $('.okta-sign-in-header'));
       console.log('transaction', this.options.appState.get('transaction'));
       this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      // this.model.set('scopes', this.options.appState.get('transaction').scopes);
-      this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', displayName: 'TEST B', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
+      this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      // this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', displayName: 'TEST B', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -40,7 +38,6 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
         scopes: ['array', true]
       },
       save: function () {
-        console.log(this);
         return this.doTransaction(function(transaction) {
           return transaction.consent({
             consent: {
@@ -55,31 +52,26 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
         return this.doTransaction(function(transaction) {
           return transaction.cancel();
         }).then(function () {
-          console.log('self', self);
-          self.state.set('navigateDir', Enums.DIRECTION_BACK);
-          self.options.appState.trigger('navigate', '');
+          // Waiting fed team for this
+          // self.options.appState.trigger('navigate', 'TODO');
         });
       }
     },
     Form: {
       noButtonBar: true,
-      // title: function () {
-      //   return 'Consent Required';
-      // },
-      // subtitle: function () {
-      //   return 'Click button to give consent';
-      // },
       formChildren: function () {
         return [
           FormType.View({
             View: new ConsentHeader({
-              orgLogo: 'logoUrl',
-              userName: 'nTest',
-              userLastName: 'lTest'
+              orgLogo: 'http://rain.okta1.com:1802/assets/img/logos/okta-logo.00b28e552573899e15fa6e77278759d5.png',
+              userName: 'Manuel',
+              userLastName: 'Tanzi'
             })
           }),
           FormType.View({
-            View: new ConsentBeacon({ model: this.model })
+            View: new ConsentBeacon({
+              clientLogo: 'link0' //this.options.appState.get('transaction').target.terms-of-service.href,
+            })
           }),
           FormType.View({
             View: Okta.View.extend({
@@ -124,32 +116,12 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
           }),
           FormType.View({
             View: new ConsentButtonsBar({ model: this.model })
-          }),
-          // FormType.Button({
-          //   title: 'CONSENT',
-          //   className: 'button-primary button next link-button',
-          //   // attributes: {'data-se': 'custom-button'},
-          //   click: function () {
-          //     // this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-          //     // this.model.set('scopes', _.pluck(this.options.appState.get('transaction').scopes, 'name'));
-          //     this.model.save();
-          //   }
-          // }),
-          // FormType.Button({
-          //   title: 'CANCEL',
-          //   className: 'button-primary button next link-button',
-          //   // attributes: {'data-se': 'custom-button'},
-          //   click: function () {
-          //     this.model.cancel();
-          //   }
-          // })
+          })
         ];
       },
       preRender: function () {
-        console.log('HErarE');
-        console.log('auth-beacon', $('.okta-sign-in-header'));
         $('.okta-sign-in-header').hide();
-      },
+      }
     }
   });
 
