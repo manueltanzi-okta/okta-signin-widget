@@ -28,9 +28,10 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
     className: 'consent-required',
     initialize: function () {
       console.log('transaction', this.options.appState.get('transaction'));
-      this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      this.model.set('scopes', this.options.appState.get('transaction').scopes);
-      // this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', displayName: 'TEST B', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
+      // this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
+      // this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      this.model.set('expiresAt', 'expireTEST');
+      this.model.set('scopes', [{name: 'View profile information', description: 'ASD1'}, {name: 'Schedule appointments', displayName: 'TEST B', description: 'ASD2'}, {name: 'Cancel appointments', description: 'ASD3'}, {name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -80,7 +81,8 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
                 <p><b>{{appName}}</b> is requesting permissions to:</p>\
               ',
               getTemplateData: function () {
-                return { appName: this.options.appState.get('transaction').target.label };
+                // return { appName: this.options.appState.get('transaction').target.label };
+                return { appName: 'TEST' };
               }
             })
           }),

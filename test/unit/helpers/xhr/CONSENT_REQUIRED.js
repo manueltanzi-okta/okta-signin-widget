@@ -60,11 +60,11 @@ define({
         "id": "00uo9lKo7Ea265DZq0g3",
         "passwordChanged": "2017-03-21T11:07:32.000Z",
         "profile": {
-          "login": "karl@example.com",
-          "firstName": "Karl",
-          "lastName": "McGuinness",
-          "locale": "en",
-          "timeZone": "America/Los_Angeles"
+          "login": "administrator1@clouditude.net",
+          "firstName": "Add-Min",
+          "lastName": "O'Cloudy Tud",
+          "locale": "en_US",
+          "timeZone": "America\/Los_Angeles"
         }
       }
     },

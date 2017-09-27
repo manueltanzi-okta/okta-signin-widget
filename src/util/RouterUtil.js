@@ -100,6 +100,9 @@ function (Okta, Util, OAuth2Util, Enums, BrowserFeatures, Errors, ErrorCodes) {
 
     switch (res.status) {
     case 'SUCCESS':
+      // router.navigate('signin/consent', { trigger: true });
+      // return;
+
       if(res.recoveryType === Enums.RECOVERY_TYPE_UNLOCK) {
         router.navigate('signin/account-unlocked', {trigger: true});
         return;
