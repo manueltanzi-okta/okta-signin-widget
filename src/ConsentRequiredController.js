@@ -64,14 +64,14 @@ function (Okta, FormController, FormType, ConsentHeader, ConsentBeacon, ScopeLis
         return [
           FormType.View({
             View: new ConsentHeader({
-              orgLogo: 'http://rain.okta1.com:1802/assets/img/logos/okta-logo.00b28e552573899e15fa6e77278759d5.png',
-              userName: 'Manuel',
-              userLastName: 'Tanzi'
+              orgLogo: 'TESTLOGO', // TODO where in the API??
+              userName: this.options.appState.get('transaction').user.profile.firstName,
+              userLastName: this.options.appState.get('transaction').user.profile.lastName
             })
           }),
           FormType.View({
             View: new ConsentBeacon({
-              clientLogo: 'link0' //this.options.appState.get('transaction').target.terms-of-service.href,
+              clientLogo: this.options.appState.get('transaction').target.logo.href,
             })
           }),
           FormType.View({

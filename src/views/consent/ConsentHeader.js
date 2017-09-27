@@ -22,10 +22,12 @@ define([
       <div class="header-wrapper">\
         <div class="logo-wrapper">\
           {{#if orgLogo}}\
-            <img class="client-logo" src="{{orgLogo}}" />\
+            <img class="org-logo" src="{{orgLogo}}" />\
           {{/if}}\
         </div>\
         <div class="username-wrapper">\
+          {{#if userName}}{{userName}}{{/if}}\
+          {{#if userLastName}}{{userLastName}}{{/if}}\
         </div>\
       </div>\
     '

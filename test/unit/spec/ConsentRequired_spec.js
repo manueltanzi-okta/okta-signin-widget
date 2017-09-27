@@ -59,16 +59,41 @@ function (Q, _, $, OktaAuth, LoginUtil, SharedUtil, Util, ConsentRequiredForm, E
 
   Expect.describe('ConsentRequired', function () {
 
-    Expect.describe('PasswordExpired', function () {
+    Expect.describe('ConsentHeader', function () {
+      itp('has the correct org logo', function () {
+        return setup().then(function (test) {
+          expect(test.form.orgLogo()).toHaveAttr('src', 'TESTLOGO');
+        });
+      });
+      itp('has the correct username', function () {
+        return setup().then(function (test) {
+          expect(test.form.username().text()).toContain('Add-Min');
+          expect(test.form.username().text()).toContain('O\'Cloudy Tud');
+        });
+      });
+    });
+
+    Expect.describe('ConsentBeacon', function () {
+      itp('has the correct user logo', function () {
+        return setup().then(function (test) {
+          expect(test.form.userLogo()).toHaveClass('person-16-gray');
+        });
+      });
+      itp('has the correct client logo', function () {
+        return setup().then(function (test) {
+          expect(test.form.clientLogo()).toHaveAttr('src', 'https://example.com/logo.png');
+        });
+      });
+    });
+
+    Expect.describe('ConsentForm', function () {
       itp('has the correct title', function () {
         return setup().then(function (test) {
-          console.log(test.form.consentButton());
           expect(test.form.consentButton().val()).toBe('Allow Access');
         });
       });
       itp('has the correct title', function () {
         return setup().then(function (test) {
-          console.log(test.form.consentButton());
           expect(test.form.consentButton().val()).toBe('Allow Access');
         });
       });
