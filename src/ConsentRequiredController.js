@@ -76,7 +76,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
             View: Okta.View.extend({
               className: 'consent-title',
               template: '\
-                <p><b>{{appName}}</b> {{i18n code="consent.required.title" bundle="login"}}</p>\
+                <p>{{{i18n code="consent.required.headline" bundle="login" arguments="appName"}}}</p>\
               ',
               getTemplateData: function () {
                 return { appName: transaction.target.label };
