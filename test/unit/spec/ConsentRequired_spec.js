@@ -31,6 +31,7 @@ function (Q, _, $, OktaAuth, LoginUtil, SharedUtil, Util, ConsentRequiredForm, E
     var router = new Router(_.extend({
       el: $sandbox,
       baseUrl: baseUrl,
+      features: { consent: true },
       logo: logoUrl,
       cancelConsent: cancelConsentUrl,
       authClient: authClient,
