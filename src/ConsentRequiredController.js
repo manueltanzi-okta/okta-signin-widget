@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2015-2016, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -51,7 +51,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
         return this.doTransaction(function(transaction) {
           return transaction.cancel();
         }).then(function () {
-          Util.redirect(self.settings.get('cancelConsent'));
+          Util.redirect(self.settings.get('consentCancelLink'));
         });
       }
     },
@@ -63,7 +63,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
           FormType.View({
             View: new ConsentHeader({
               orgLogo: this.settings.get('logo'),
-              userName: transaction.user.profile.firstName,
+              userFirstName: transaction.user.profile.firstName,
               userLastName: transaction.user.profile.lastName
             })
           }),

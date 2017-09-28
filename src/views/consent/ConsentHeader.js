@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2015-2016, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,7 +24,7 @@ define([
           {{/if}}\
         </div>\
         <div class="username-wrapper">\
-          {{#if userName}}{{userName}}{{/if}}\
+          {{#if userFirstName}}{{userFirstName}}{{/if}}\
           {{#if userLastName}}{{userLastName}}{{/if}}\
         </div>\
       </div>\

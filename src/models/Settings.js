@@ -49,7 +49,7 @@ function (Okta, Q, Errors, BrowserFeatures, Util, Logger, OAuth2Util, config) {
       'stateToken': ['string', false, undefined],
       'username' : ['string', false],
       'signOutLink': ['string', false],
-      'cancelConsent': ['string', false],
+      'consentCancelLink': ['string', false],
 
       // Function to transform the username before passing it to the API
       // for Primary Auth, Forgot Password and Unlock Account.
