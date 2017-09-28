@@ -95,10 +95,10 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
                   <a class="terms-of-service" href="{{termsOfService}}" target="_blank">\
                     {{i18n code="consent.required.termsOfService" bundle="login"}}\
                   </a>\
+                  {{#if privacyPolicy}}\
+                    &#8226\
+                  {{/if}}\
                 {{/if}}\
-                {{#if termsOfService}}{{#if privacyPolicy}}\
-                  &#8226\
-                {{/if}}{{/if}}\
                 {{#if privacyPolicy}}\
                   <a class="privacy-policy" href="{{privacyPolicy}}" target="_blank">\
                     {{i18n code="consent.required.privacyPolicy" bundle="login"}}\

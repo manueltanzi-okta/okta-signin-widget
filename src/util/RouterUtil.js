@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* eslint complexity: [2, 27],max-statements: [2, 29] */
+/* eslint complexity: [2, 28],max-statements: [2, 30] */
 define([
   'okta',
   'shared/util/Util',
@@ -143,7 +143,9 @@ function (Okta, Util, OAuth2Util, Enums, BrowserFeatures, Errors, ErrorCodes) {
       router.settings.callGlobalSuccess(Enums.SUCCESS, successData);
       return;
     case 'CONSENT_REQUIRED':
-      router.navigate('signin/consent', { trigger: true });
+      if (router.settings.get('features.consent')) {
+        router.navigate('signin/consent', {trigger: true});
+      }
       return;
     case 'MFA_REQUIRED':
       var factor = router.appState.get('factors').getDefaultFactor();
