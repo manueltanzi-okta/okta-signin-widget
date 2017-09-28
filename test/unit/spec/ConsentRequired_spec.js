@@ -26,14 +26,14 @@ function (Q, _, $, OktaAuth, LoginUtil, SharedUtil, Util, ConsentRequiredForm, E
     var setNextResponse = Util.mockAjax();
     var baseUrl = 'https://example.okta.com';
     var logoUrl = 'https://logo.com';
-    var cancelConsentUrl = 'https://cancel.com';
+    var consentCancelLink = 'https://cancel.com';
     var authClient = new OktaAuth({url: baseUrl, transformErrorXHR: LoginUtil.transformErrorXHR});
     var router = new Router(_.extend({
       el: $sandbox,
       baseUrl: baseUrl,
       features: { consent: true },
       logo: logoUrl,
-      cancelConsent: cancelConsentUrl,
+      consentCancelLink: consentCancelLink,
       authClient: authClient,
       globalSuccessFn: successSpy
     }, settings));
@@ -157,7 +157,7 @@ function (Q, _, $, OktaAuth, LoginUtil, SharedUtil, Util, ConsentRequiredForm, E
           expect(test.form.cancelButton()).toExist();
         });
       });
-      itp('cancel button click cancels the current stateToken and redirects to the provided cancelConsent url', function () {
+      itp('cancel button click cancels the current stateToken and redirects to the provided consentCancelLink', function () {
         return setup().then(function (test) {
           spyOn(SharedUtil, 'redirect');
           $.ajax.calls.reset();
