@@ -422,6 +422,69 @@ function (Okta, Q, Factor, BrowserFeatures, Errors) {
           return userProfile.firstName + ' ' + userProfile.lastName;
         }
       },
+      'expiresAt': {
+        deps: ['lastAuthResponse'],
+        fn: function (res) {
+          if (!res.expiresAt) {
+            return false;
+          }
+          return res.expiresAt;
+        }
+      },
+      'target': {
+        deps: ['lastAuthResponse'],
+        fn: function (res) {
+          if (!res._embedded || !res._embedded.target) {
+            return false;
+          }
+          return res._embedded.target;
+        }
+      },
+      'targetLabel': {
+        deps: ['target'],
+        fn: function (target) {
+          if (!target || !target.label) {
+            return false;
+          }
+          return target.label;
+        }
+      },
+      'targetLogo': {
+        deps: ['target'],
+        fn: function (target) {
+          if (!target._links || !target._links.logo) {
+            return false;
+          }
+          return target._links.logo;
+        }
+      },
+      'targetTermsOfService': {
+        deps: ['target'],
+        fn: function (target) {
+          if (!target._links || !target._links['terms-of-service']) {
+            return false;
+          }
+          return target._links['terms-of-service'];
+        }
+      },
+      'targetPrivacyPolicy': {
+        deps: ['target'],
+        fn: function (target) {
+          if (!target._links || !target._links['privacy-policy']) {
+            return false;
+          }
+          return target._links['privacy-policy'];
+        }
+      },
+      'scopes': {
+        deps: ['lastAuthResponse'],
+        fn: function (res) {
+          if (!res._embedded || !res._embedded.scopes) {
+            return false;
+          }
+          return res._embedded.scopes;
+        }
+      },
       'hasExistingPhones': {
         deps: ['lastAuthResponse'],
         fn: function (res) {

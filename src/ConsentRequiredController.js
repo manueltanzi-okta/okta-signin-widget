@@ -28,8 +28,8 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
-      this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      this.model.set('expiresAt', this.options.appState.get('expiresAt'));
+      this.model.set('scopes', this.options.appState.get('scopes'));
     },
     Model: {
       props: {
@@ -58,18 +58,18 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
     Form: {
       noButtonBar: true,
       formChildren: function () {
-        var transaction = this.options.appState.get('transaction');
+        var appState = this.options.appState;
         return [
           FormType.View({
             View: new ConsentHeader({
               orgLogo: this.settings.get('logo'),
-              userFirstName: transaction.user.profile.firstName,
-              userLastName: transaction.user.profile.lastName
+              userFirstName: appState.get('userProfile').firstName,
+              userLastName: appState.get('userProfile').lastName
             })
           }),
           FormType.View({
             View: new ConsentBeacon({
-              clientLogo: transaction.target.logo && transaction.target.logo.href,
+              clientLogo: appState.get('targetLogo') && appState.get('targetLogo').href,
             })
           }),
           FormType.View({
@@ -79,7 +79,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
                 <p>{{{i18n code="consent.required.headline" bundle="login" arguments="appName"}}}</p>\
               ',
               getTemplateData: function () {
-                return { appName: transaction.target.label };
+                return { appName: appState.get('targetLabel') };
               }
             })
           }),
@@ -106,17 +106,9 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
                 {{/if}}\
               ',
               getTemplateData: function () {
-                var termOfServiceUrl;
-                var privacyPolicyUrl;
-                if (transaction.target['terms-of-service']) {
-                  termOfServiceUrl = transaction.target['terms-of-service'].href;
-                }
-                if (transaction.target['privacy-policy']) {
-                  privacyPolicyUrl = transaction.target['privacy-policy'].href;
-                }
                 return {
-                  termsOfService: termOfServiceUrl,
-                  privacyPolicy: privacyPolicyUrl
+                  termsOfService: appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
+                  privacyPolicy: appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
                 };
               }
             })
