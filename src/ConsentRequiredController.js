@@ -28,8 +28,8 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
-      this.model.set('expiresAt', this.options.appState.get('transaction').expiresAt);
-      this.model.set('scopes', this.options.appState.get('transaction').scopes);
+      this.model.set('expiresAt', this.options.appState.get('expiresAt'));
+      this.model.set('scopes', this.options.appState.get('scopes'));
     },
     Model: {
       props: {
@@ -58,28 +58,19 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
     Form: {
       noButtonBar: true,
       formChildren: function () {
-        var transaction = this.options.appState.get('transaction');
+        var appState = this.options.appState;
         return [
-          FormType.View({
-            View: new ConsentHeader({
-              orgLogo: this.settings.get('logo'),
-              userFirstName: transaction.user.profile.firstName,
-              userLastName: transaction.user.profile.lastName
-            })
-          }),
-          FormType.View({
-            View: new ConsentBeacon({
-              clientLogo: transaction.target.logo && transaction.target.logo.href,
-            })
-          }),
           FormType.View({
             View: Okta.View.extend({
               className: 'consent-title',
               template: '\
-                <p>{{{i18n code="consent.required.headline" bundle="login" arguments="appName"}}}</p>\
+                <p><b>{{appName}}</b> wants to access yor account (<b>{{userConsentName}}</b>) in order to:</p>\
               ',
               getTemplateData: function () {
-                return { appName: transaction.target.label };
+                return {
+                  appName: appState.get('targetLabel'),
+                  userConsentName: appState.get('userConsentName') || appState.get('userProfile').firstName || appState.get('username')
+                };
               }
             })
           }),
@@ -106,17 +97,9 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
                 {{/if}}\
               ',
               getTemplateData: function () {
-                var termOfServiceUrl;
-                var privacyPolicyUrl;
-                if (transaction.target['terms-of-service']) {
-                  termOfServiceUrl = transaction.target['terms-of-service'].href;
-                }
-                if (transaction.target['privacy-policy']) {
-                  privacyPolicyUrl = transaction.target['privacy-policy'].href;
-                }
                 return {
-                  termsOfService: termOfServiceUrl,
-                  privacyPolicy: privacyPolicyUrl
+                  termsOfService: appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
+                  privacyPolicy: appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
                 };
               }
             })
@@ -125,9 +108,6 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
             View: new ConsentButtonsBar({ model: this.model })
           })
         ];
-      },
-      preRender: function () {
-        $('.okta-sign-in-header').hide();
       }
     }
   });

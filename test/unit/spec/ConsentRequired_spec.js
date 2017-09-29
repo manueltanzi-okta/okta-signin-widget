@@ -55,17 +55,6 @@ function (Q, _, $, OktaAuth, LoginUtil, SharedUtil, Util, ConsentRequiredForm, E
   Expect.describe('ConsentRequired', function () {
 
     Expect.describe('ConsentHeader', function () {
-      itp('has the correct org logo', function () {
-        return setup().then(function (test) {
-          expect(test.form.orgLogo()).toHaveAttr('src', 'https://logo.com');
-        });
-      });
-      itp('has the correct username', function () {
-        return setup().then(function (test) {
-          expect(test.form.username().text()).toContain('Add-Min');
-          expect(test.form.username().text()).toContain('O\'Cloudy Tud');
-        });
-      });
     });
 
     Expect.describe('ConsentBeacon', function () {

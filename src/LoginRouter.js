@@ -51,7 +51,8 @@ define([
   'RegistrationCompleteController',
   'ConsentRequiredController',
   'views/shared/SecurityBeacon',
-  'views/shared/FactorBeacon'
+  'views/shared/FactorBeacon',
+  'views/shared/ConsentBeacon'
 ],
 function (BaseLoginRouter,
           PrimaryAuthController,
@@ -92,7 +93,8 @@ function (BaseLoginRouter,
           RegistrationCompleteController,
           ConsentRequiredController,
           SecurityBeacon,
-          FactorBeacon) {
+          FactorBeacon,
+          ConsentBeacon) {
   return BaseLoginRouter.extend({
 
     routes: {
@@ -396,7 +398,7 @@ function (BaseLoginRouter,
     },
 
     consentRequired: function() {
-      this.render(ConsentRequiredController);
+      this.render(ConsentRequiredController, { Beacon: ConsentBeacon });
     }
 
   });

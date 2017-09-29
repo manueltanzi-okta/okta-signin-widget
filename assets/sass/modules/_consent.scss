@@ -1,92 +1,84 @@
-.consent-header {
-  background-color: #f7f7f7;
-  border-bottom: 1px solid;
-  border-color: $border-color-default;
-  height: 30px;
-  margin: -40px -42px 0;
-  padding: 20px;
-  font-size: 17px;
-
-  .header-wrapper {
-    display: inline-block;
-    width: 100%;
-  }
-
-  .logo-wrapper {
-    height: 100%;
-    float: left;
-  }
-
-  .org-logo {
-    max-height: 100%;
-  }
-
-  .username-wrapper {
-    float: right;
-    line-height: 30px;
-  }
-}
-
 .consent-beacon {
-  text-align: center;
-  padding: 30px 0 40px;
-
-  .beacon-wrapper {
-    display: inline-block;
-    margin: auto;
-  }
 
   .logo-wrapper {
-    float: left;
-    height: 80px;
-    width: 80px;
-    background-color: #d3d3d3;
-    border: 1px solid;
+    width: 71px;
+    height: 71px;
+    position: absolute;
+    border-radius: 50%;
+    top: 7px;
+    bottom: 0;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-clip: content-box;
+    color: #fff;
+  }
+
+  .consent-beacon-border {
+    position: absolute;
+    border: 1px solid #ddd;
     border-radius: $border-radius-default;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .consent-beacon-user {
+    left: -45px;
+
+    .user-logo::before {
+      color: #737373;
+      font-size: 69px;
+      margin: -10px 0 0 0;
+    }
+  }
+
+  .consent-beacon-client {
+    left: 59px;
+
+    .client-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: $border-radius-default;
+    }
   }
 
   .arrows-wrapper {
-    margin: 0 8px;
-    float: left;
-    height: 80px;
-    width: 41px;
+    background: white;
+    position: absolute;
+    top: 10px;
+    left: 26px;
+    height: 65px;
+    width: 34px;
   }
 
   .arrow-left {
-    height: 25px;
+    position: absolute;
+    top: 24px;
+    left: 5px;
+  }
+
+  .arrow-right {
+    position: absolute;
+    top: 10px;
+    left: 5px;
   }
 
   .arrow::before {
-    color: $text-color-dark;
-    font-size: 41px;
-  }
-
-  .logo {
-    margin: 9px;
-    height: 60px;
-    width: 60px;
-    background-color: $white;
-    border-radius: $border-radius-default;
-    border: 1px solid;
-  }
-
-  .user-logo::before {
-    margin: -11px 0 0 1px;
-    font-size: 59px;
-  }
-
-  .client-logo {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: $border-radius-default;
+    color: #a7a7a7;
+    font-size: 24px;
   }
 }
 
 .consent-title {
+  padding-top: 20px;
   padding-bottom: 25px;
+  text-align: center;
 
   p {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   b {
@@ -97,11 +89,11 @@
 .scope-item {
   display: inline-block;
   width: 100%;
-  padding-bottom: 25px;
+  padding-bottom: 5px;
 
   .scope-item-text {
     float: left;
-    font-size: 17px;
+    font-size: 14px;
     width: 85%;
     word-wrap: break-word;
   }
@@ -113,6 +105,7 @@
 }
 
 .consent-description {
+  padding-top: 15px;
   padding-bottom: 25px;
   font-size: $body-font-size;
 
@@ -131,32 +124,17 @@
   width: 100%;
 
   input {
-    font-size: 13px;
-    float: right;
-    width: 100px;
-    height: 30px;
-    padding: 0 10px;
-    line-height: 30px;
-    overflow: visible;
-    border: 1px solid;
+    width: 140px;
+    height: 50px;
+    line-height: 48px;
     text-align: center;
-    cursor: pointer;
-    border-radius: $border-radius-default;
   }
 
   .cancel-button {
-    margin-right: 15px;
-    color: #5e5e5e;
-    background: linear-gradient(#fefefe, #f9f9f9), #f9f9f9;
-    border-color: #c3c3c3 #c3c3c3 #bebebe;
-    box-shadow: rgba(0, 0, 0, 0.06) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+    float: left;
   }
 
   .consent-button {
-    color: #fff;
-    background: linear-gradient(#4cbf9c, #44bc98), #44bc98;
-    border-color: #328c71 #328c71 #2f856b;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+    float: right;
   }
-
 }
