@@ -27,66 +27,142 @@
   }
 }
 
-.consent-beacon {
-  text-align: center;
-  padding: 30px 0 40px;
+//.consent-beacon {
+//  text-align: center;
+//  padding: 30px 0 40px;
+//
+//  .beacon-wrapper {
+//    display: inline-block;
+//    margin: auto;
+//  }
+//
+//  .logo-wrapper {
+//    float: left;
+//    height: 80px;
+//    width: 80px;
+//    background-color: #d3d3d3;
+//    border: 1px solid;
+//    border-radius: $border-radius-default;
+//  }
+//
+//  .arrows-wrapper {
+//    margin: 0 8px;
+//    float: left;
+//    height: 80px;
+//    width: 41px;
+//  }
+//
+//  .arrow-left {
+//    height: 25px;
+//  }
+//
+//  .arrow::before {
+//    color: $text-color-dark;
+//    font-size: 41px;
+//  }
+//
+//  .logo {
+//    margin: 9px;
+//    height: 60px;
+//    width: 60px;
+//    background-color: $white;
+//    border-radius: $border-radius-default;
+//    border: 1px solid;
+//  }
+//
+//  .user-logo::before {
+//    margin: -11px 0 0 1px;
+//    font-size: 59px;
+//  }
+//
+//  .client-logo {
+//    max-width: 100%;
+//    max-height: 100%;
+//    border-radius: $border-radius-default;
+//  }
+//}
 
-  .beacon-wrapper {
-    display: inline-block;
-    margin: auto;
-  }
+.consent-beacon {
 
   .logo-wrapper {
-    float: left;
-    height: 80px;
-    width: 80px;
-    background-color: #d3d3d3;
-    border: 1px solid;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    border-radius: 50%;
+    top: 15px;
+    bottom: 0;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-clip: content-box;
+    color: #fff;
+    box-shadow: 0 0 0 5px;
+  }
+
+  .consent-beacon-border {
+    position: absolute;
+    border: 1px solid #ddd;
     border-radius: $border-radius-default;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    top: -5px;
+  }
+
+  .consent-beacon-user {
+    left: -31px;
+
+    .user-logo::before {
+      color: #737373;
+      font-size: 64px;
+      margin: -10px 0 0 0;
+    }
+  }
+
+  .consent-beacon-client {
+    left: 61px;
   }
 
   .arrows-wrapper {
-    margin: 0 8px;
-    float: left;
-    height: 80px;
-    width: 41px;
+    //margin: 0 8px;
+    //float: left;
+    //height: 80px;
+    //width: 41px;
+
+    background: white;
+    position: absolute;
+    top: 10px;
+    left: 29px;
+    height: 65px;
+    width: 28px;
   }
 
   .arrow-left {
-    height: 25px;
+    position: absolute;
+    left: 2px;
+    top: 24px;
+  }
+
+  .arrow-right {
+    position: absolute;
+    top: 10px;
+    left: 2px;
   }
 
   .arrow::before {
-    color: $text-color-dark;
-    font-size: 41px;
-  }
-
-  .logo {
-    margin: 9px;
-    height: 60px;
-    width: 60px;
-    background-color: $white;
-    border-radius: $border-radius-default;
-    border: 1px solid;
-  }
-
-  .user-logo::before {
-    margin: -11px 0 0 1px;
-    font-size: 59px;
-  }
-
-  .client-logo {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: $border-radius-default;
+    color: #a7a7a7;
+    font-size: 24px;
   }
 }
 
 .consent-title {
+  padding-top: 15px;
   padding-bottom: 25px;
+  text-align: center;
 
   p {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   b {
@@ -97,11 +173,11 @@
 .scope-item {
   display: inline-block;
   width: 100%;
-  padding-bottom: 25px;
+  padding-bottom: 5px;
 
   .scope-item-text {
     float: left;
-    font-size: 17px;
+    font-size: 14px;
     width: 85%;
     word-wrap: break-word;
   }
@@ -113,6 +189,7 @@
 }
 
 .consent-description {
+  padding-top: 15px;
   padding-bottom: 25px;
   font-size: $body-font-size;
 

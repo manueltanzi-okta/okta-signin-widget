@@ -16,6 +16,7 @@ define(['okta', 'util/Animations'], function (Okta, Animations) {
       $ = Okta.$;
 
   function setBackgroundImage (el, appState) {
+    console.log()
     // NOTE: The imgSrc is returned by the server so that every
     // user has a unique image. However new and undefined user states
     // are hard coded into the css and the value returned by the server

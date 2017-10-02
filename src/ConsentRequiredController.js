@@ -28,8 +28,10 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
-      this.model.set('expiresAt', this.options.appState.get('expiresAt'));
-      this.model.set('scopes', this.options.appState.get('scopes'));
+      // this.model.set('expiresAt', this.options.appState.get('expiresAt'));
+      // this.model.set('scopes', this.options.appState.get('scopes'));
+      this.model.set('expiresAt', 'expiresAtTest');
+      this.model.set('scopes', [{ name: 'View profile information', description: 'ASD1' }, { name: 'Schedule appointments', description: 'ASD2'}, { name: 'Cancel appointments', description: 'ASD3'}, { name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -60,18 +62,18 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
       formChildren: function () {
         var appState = this.options.appState;
         return [
-          FormType.View({
-            View: new ConsentHeader({
-              orgLogo: this.settings.get('logo'),
-              userFirstName: appState.get('userProfile').firstName,
-              userLastName: appState.get('userProfile').lastName
-            })
-          }),
-          FormType.View({
-            View: new ConsentBeacon({
-              clientLogo: appState.get('targetLogo') && appState.get('targetLogo').href,
-            })
-          }),
+          // FormType.View({
+          //   View: new ConsentHeader({
+          //     orgLogo: this.settings.get('logo'),
+          //     userFirstName: 'Manuel',//appState.get('userProfile').firstName,
+          //     userLastName: 'Tanzi'//appState.get('userProfile').lastName
+          //   })
+          // }),
+          // FormType.View({
+          //   View: new ConsentBeacon({
+          //     clientLogo: appState.get('targetLogo') && appState.get('targetLogo').href,
+          //   })
+          // }),
           FormType.View({
             View: Okta.View.extend({
               className: 'consent-title',
@@ -79,7 +81,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
                 <p>{{{i18n code="consent.required.headline" bundle="login" arguments="appName"}}}</p>\
               ',
               getTemplateData: function () {
-                return { appName: appState.get('targetLabel') };
+                return { appName: 'AppTest' /*appState.get('targetLabel')*/ };
               }
             })
           }),
@@ -119,7 +121,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
         ];
       },
       preRender: function () {
-        $('.okta-sign-in-header').hide();
+        // $('.okta-sign-in-header').hide();
       }
     }
   });
