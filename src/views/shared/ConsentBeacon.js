@@ -31,8 +31,14 @@ define(['okta'], function (Okta) {
       </div>\
       <div class="logo-wrapper consent-beacon-client">\
         <div class="consent-beacon-border"/>\
+          <img class="client-logo" src="{{clientLogo}}" />\
+        </div>\
       </div>\
     ',
+
+    getTemplateData: function () {
+      return { clientLogo: this.options.appState.get('targetLogo') };
+    },
 
     equals: function (Beacon) {
       return Beacon && this instanceof Beacon;

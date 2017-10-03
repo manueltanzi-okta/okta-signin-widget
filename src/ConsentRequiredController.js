@@ -78,10 +78,14 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
             View: Okta.View.extend({
               className: 'consent-title',
               template: '\
-                <p>{{{i18n code="consent.required.headline" bundle="login" arguments="appName"}}}</p>\
+                <p><b>{{appName}}</b> wants to access yor account (<b>{{userConsentName}}</b>) in order to:</p>\
               ',
               getTemplateData: function () {
-                return { appName: 'AppTest' /*appState.get('targetLabel')*/ };
+                return {
+                  appName: 'AppTest', /*appState.get('targetLabel')*/
+                  userConsentName: appState.get('userConsentName') || appState.get('userProfile').firstName || appState.get('username') //'Manuel',//appState.get('userProfile').firstName,
+                  // userLastName: 'Tanzi'//appState.get('userProfile').lastName
+                };
               }
             })
           }),
@@ -109,8 +113,8 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
               ',
               getTemplateData: function () {
                 return {
-                  termsOfService: appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
-                  privacyPolicy: appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
+                  termsOfService: 'link1',//appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
+                  privacyPolicy: 'link2'//appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
                 };
               }
             })

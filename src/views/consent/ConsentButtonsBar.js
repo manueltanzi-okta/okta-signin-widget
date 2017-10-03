@@ -17,8 +17,8 @@ define([
   return Okta.View.extend({
     className: 'consent-button-bar',
     template: '\
-      <input type="button" class="consent-button" value="{{consentValue}}" />\
-      <input type="button" class="cancel-button" value="{{cancelValue}}" />\
+      <input type="button" class="cancel-button button" value="{{cancelValue}}" />\
+      <input type="button" class="consent-button button button-primary" value="{{consentValue}}" />\
     ',
 
     events: {
@@ -27,10 +27,12 @@ define([
     },
 
     consent: function () {
+      console.log('save');
       this.model.save();
     },
 
     cancel: function () {
+      console.log('cancel');
       this.model.cancel();
     },
 
