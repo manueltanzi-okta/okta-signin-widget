@@ -141,8 +141,10 @@ function (Okta, Q, Errors, BrowserFeatures, Util, Logger, OAuth2Util, config) {
 
       //Registration
       'registration.click': 'function',
-      'registration.clientId': 'string'
+      'registration.clientId': 'string',
 
+      //Consent
+      'consent': 'object'
     },
 
     derived: {

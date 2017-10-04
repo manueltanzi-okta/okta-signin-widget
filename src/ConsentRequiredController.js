@@ -51,7 +51,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
         return this.doTransaction(function(transaction) {
           return transaction.cancel();
         }).then(function () {
-          Util.redirect(self.settings.get('consentCancelLink'));
+          self.settings.get('consent').cancel();
         });
       }
     },
