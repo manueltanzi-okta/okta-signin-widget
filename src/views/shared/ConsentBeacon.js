@@ -37,7 +37,7 @@ define(['okta'], function (Okta) {
     ',
 
     getTemplateData: function () {
-      return { clientLogo: this.options.appState.get('targetLogo') };
+      return { clientLogo: this.options.appState.get('targetLogo') && this.options.appState.get('targetLogo').href };
     },
 
     equals: function (Beacon) {

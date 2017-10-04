@@ -28,10 +28,10 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
   return FormController.extend({
     className: 'consent-required',
     initialize: function () {
-      // this.model.set('expiresAt', this.options.appState.get('expiresAt'));
-      // this.model.set('scopes', this.options.appState.get('scopes'));
-      this.model.set('expiresAt', 'expiresAtTest');
-      this.model.set('scopes', [{ name: 'View profile information', description: 'ASD1' }, { name: 'Schedule appointments', description: 'ASD2'}, { name: 'Cancel appointments', description: 'ASD3'}, { name: 'Edit appointments', description: 'ASD4'}]);
+      this.model.set('expiresAt', this.options.appState.get('expiresAt'));
+      this.model.set('scopes', this.options.appState.get('scopes'));
+      // this.model.set('expiresAt', 'expiresAtTest');
+      // this.model.set('scopes', [{ name: 'View profile information', description: 'ASD1' }, { name: 'Schedule appointments', description: 'ASD2'}, { name: 'Cancel appointments', description: 'ASD3'}, { name: 'Edit appointments', description: 'ASD4'}]);
     },
     Model: {
       props: {
@@ -82,7 +82,7 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
               ',
               getTemplateData: function () {
                 return {
-                  appName: 'AppTest', /*appState.get('targetLabel')*/
+                  appName: appState.get('targetLabel'),
                   userConsentName: appState.get('userConsentName') || appState.get('userProfile').firstName || appState.get('username') //'Manuel',//appState.get('userProfile').firstName,
                   // userLastName: 'Tanzi'//appState.get('userProfile').lastName
                 };
@@ -113,8 +113,8 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
               ',
               getTemplateData: function () {
                 return {
-                  termsOfService: 'link1',//appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
-                  privacyPolicy: 'link2'//appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
+                  termsOfService: appState.get('targetTermsOfService') && appState.get('targetTermsOfService').href,
+                  privacyPolicy: appState.get('targetPrivacyPolicy') && appState.get('targetPrivacyPolicy').href
                 };
               }
             })
@@ -123,9 +123,6 @@ function (Okta, Util, FormController, FormType, ConsentHeader, ConsentBeacon, Sc
             View: new ConsentButtonsBar({ model: this.model })
           })
         ];
-      },
-      preRender: function () {
-        // $('.okta-sign-in-header').hide();
       }
     }
   });

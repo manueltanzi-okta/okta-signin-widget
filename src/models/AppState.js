@@ -461,11 +461,11 @@ function (Okta, Q, Factor, BrowserFeatures, Errors) {
       'targetLogo': {
         deps: ['target'],
         fn: function (target) {
-          return 'https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0017/6596/brand.gif?itok=P-A8F4Ex';
-        //   if (!target._links || !target._links.logo) {
-        //     return false;
-        //   }
-        //   return target._links.logo;
+          // return 'https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0017/6596/brand.gif?itok=P-A8F4Ex';
+          if (!target._links || !target._links.logo) {
+            return false;
+          }
+          return target._links.logo;
         }
       },
       'targetTermsOfService': {
