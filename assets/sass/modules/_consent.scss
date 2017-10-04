@@ -85,11 +85,11 @@
 .consent-beacon {
 
   .logo-wrapper {
-    width: 65px;
-    height: 65px;
+    width: 71px;
+    height: 71px;
     position: absolute;
     border-radius: 50%;
-    top: 10px;
+    top: 7px;
     bottom: 0;
     background-color: #fff;
     background-repeat: no-repeat;
@@ -110,21 +110,21 @@
   }
 
   .consent-beacon-user {
-    left: -36px;
+    left: -45px;
 
     .user-logo::before {
       color: #737373;
-      font-size: 64px;
+      font-size: 69px;
       margin: -10px 0 0 0;
     }
   }
 
   .consent-beacon-client {
-    left: 56px;
+    left: 59px;
 
     .client-logo {
-      width: 64px;
-      height: 64px;
+      width: 70px;
+      height: 70px;
       border-radius: $border-radius-default;
     }
   }
@@ -138,21 +138,21 @@
     background: white;
     position: absolute;
     top: 10px;
-    left: 29px;
+    left: 26px;
     height: 65px;
-    width: 28px;
+    width: 34px;
   }
 
   .arrow-left {
     position: absolute;
-    left: 2px;
     top: 24px;
+    left: 5px;
   }
 
   .arrow-right {
     position: absolute;
     top: 10px;
-    left: 2px;
+    left: 5px;
   }
 
   .arrow::before {
