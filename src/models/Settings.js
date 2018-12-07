@@ -156,7 +156,10 @@ function (Okta, Q, Errors, BrowserFeatures, Util, Logger, OAuth2Util, config) {
       'consent.cancel': 'function',
 
       //IDP Discovery
-      'idpDiscovery.requestContext': 'string'
+      'idpDiscovery.requestContext': 'string',
+
+      //Colors
+      'colors.brand': 'string'
     },
 
     derived: {
